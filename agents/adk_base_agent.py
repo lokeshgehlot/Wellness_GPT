@@ -30,7 +30,7 @@ class ADKAgent(Agent):
         
         for model_attempt in model_attempts:
             try:
-                print(f"🔄 {name}: Trying model '{model_attempt}'")
+                print(f" {name}: Trying model '{model_attempt}'")
                 super().__init__(
                     name=name,
                     description=description,
@@ -39,18 +39,18 @@ class ADKAgent(Agent):
                     tools=tools or []
                 )
                 successful_model = model_attempt
-                print(f"✅ {name}: Success with model '{model_attempt}'")
+                print(f" {name}: Success with model '{model_attempt}'")
                 break
                 
             except Exception as e:
                 last_error = e
                 error_msg = str(e)
                 if "404" in error_msg or "not found" in error_msg.lower():
-                    print(f"❌ {name}: Model '{model_attempt}' not found")
+                    print(f" {name}: Model '{model_attempt}' not found")
                 elif "PERMISSION_DENIED" in error_msg:
-                    print(f"❌ {name}: Permission denied for '{model_attempt}'")
+                    print(f" {name}: Permission denied for '{model_attempt}'")
                 else:
-                    print(f"❌ {name}: Model '{model_attempt}' failed - {error_msg[:100]}...")
+                    print(f" {name}: Model '{model_attempt}' failed - {error_msg[:100]}...")
                 continue
         
         if not successful_model:
